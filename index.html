@@ -30,13 +30,9 @@
 
         const helpButton = document.getElementById("helpButton");
 
-        const clipboardText = `Describe the problem you are having by answering these questions:
-
-      - what you are trying to do
-      - what went wrong
-      - what you have tried so far
-
-Now send that message to a group chat where people can help you.`;
+        const clipboardText = `- what you are trying to do?
+- what went wrong?
+- what you have tried so far?`;
 
         function updateButtonState() {
           const allChecked = Array.from(checkboxes).every(
@@ -55,7 +51,9 @@ Now send that message to a group chat where people can help you.`;
           navigator.clipboard
             .writeText(clipboardText)
             .then(() => {
-              alert(clipboardText);
+              alert(
+                `These questions have been copied to your clipboard to help you describe your problem.\n\n${clipboardText}\n\nSend it to a group chat (preferred) or as a private message (non-preferred) to get help.`
+              );
             })
             .catch((err) => {
               console.error("Failed to copy text: ", err);
@@ -69,7 +67,7 @@ Now send that message to a group chat where people can help you.`;
     <main>
       <div>
         <h1>frontend debugging 101</h1>
-        <button id="deselectAll">deselect all</button>
+        <button id="deselectAll">Deselect all</button>
       </div>
       <h2>if there's an error message</h2>
       <div>
