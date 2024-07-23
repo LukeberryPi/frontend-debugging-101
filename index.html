@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>frontend debugging 101</title>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const deselectAllButton = document.getElementById("deselectAll");
+
+        checkboxes.forEach((checkbox) => {
+          const state = sessionStorage.getItem(checkbox.id);
+          if (state !== null) {
+            checkbox.checked = JSON.parse(state);
+          }
+          checkbox.addEventListener("change", () => {
+            sessionStorage.setItem(checkbox.id, checkbox.checked);
+          });
+        });
+
+        deselectAllButton.addEventListener("click", () => {
+          checkboxes.forEach((checkbox) => {
+            checkbox.checked = false;
+            sessionStorage.setItem(checkbox.id, false);
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <main>
+      <div>
+        <h1>frontend debugging 101</h1>
+        <button id="deselectAll">deselect all</button>
+      </div>
+      <h2>if there's an error message</h2>
+      <div>
+        <input type="checkbox" id="read-error-message" />
+        <label for="read-error-message">have you read it? (~30s)</label>
+      </div>
+      <div>
+        <input type="checkbox" id="asked-in-public" />
+        <label for="asked-in-public">have you asked in public? (~2m)</label>
+      </div>
+      <div>
+        <input type="checkbox" id="searched-codebase" />
+        <label for="searched-codebase"
+          >have you searched the codebase for a implementation? (~1m)</label
+        >
+      </div>
+      <div>
+        <input type="checkbox" id="accessed-documentation" />
+        <label for="accessed-documentation"
+          >have you accessed the documentation? (~15m)</label
+        >
+      </div>
+      <div>
+        <input type="checkbox" id="looked-up-error" />
+        <label for="looked-up-error"
+          >have you looked up the error? (~15m)</label
+        >
+      </div>
+
+      <h2>things stopped working for "no reason"</h2>
+      <div>
+        <input type="checkbox" id="saved-file" />
+        <label for="saved-file">have you saved the file? (~5s)</label>
+      </div>
+      <div>
+        <input type="checkbox" id="returning-something" />
+        <label for="returning-something"
+          >are you returning something? (~1m)</label
+        >
+      </div>
+      <div>
+        <input type="checkbox" id="right-url" />
+        <label for="right-url">are you in the right URL? (~5s)</label>
+      </div>
+      <div>
+        <input type="checkbox" id="connected-vpn" />
+        <label for="connected-vpn">are you connected to the VPN? (~10s)</label>
+      </div>
+
+      <h2>turn it off and on again</h2>
+      <div>
+        <input type="checkbox" id="restart-local-server" />
+        <label for="restart-local-server"
+          >have you restarted the local server? (~30s)</label
+        >
+      </div>
+      <div>
+        <input type="checkbox" id="restart-ts-server" />
+        <label for="restart-ts-server"
+          >have you restarted the TypeScript Server? (~10s)</label
+        >
+      </div>
+      <div>
+        <input type="checkbox" id="reinstall-node-modules" />
+        <label for="reinstall-node-modules"
+          >have you reinstalled node_modules? (~1m)</label
+        >
+      </div>
+
+      <h2>specific yet common errors</h2>
+      <div>
+        <input type="checkbox" id="cleared-cache" />
+        <label for="cleared-cache">have you cleared the cache? (~10s)</label>
+      </div>
+      <div>
+        <input type="checkbox" id="correct-file-extension" />
+        <label for="correct-file-extension"
+          >are you using the correct file extension? (~10s)</label
+        >
+      </div>
+      <div>
+        <input type="checkbox" id="sync-correct-branch" />
+        <label for="sync-correct-branch"
+          >are you in sync with the correct branch? (~1m)</label
+        >
+      </div>
+      <div>
+        <input type="checkbox" id="correct-imports" />
+        <label for="correct-imports">are your imports correct? (~30s)</label>
+      </div>
+      <div>
+        <input type="checkbox" id="anonymous-window" />
+        <label for="anonymous-window"
+          >Does it happen in an anonymous window? (~2m)</label
+        >
+      </div>
+      <div>
+        <input type="checkbox" id="correct-role-permissions" />
+        <label for="correct-role-permissions"
+          >does your current user have the correct role permissions? (~5
+          m)</label
+        >
+      </div>
+
+      <h2>i didn't solve it yet, what now?</h2>
+      <div>
+        <input type="checkbox" id="take-a-break" />
+        <label for="take-a-break">Take a break (~10m)</label>
+      </div>
+      <div>
+        <input type="checkbox" id="write-it-down" />
+        <label for="write-it-down">Write it down (~20m)</label>
+      </div>
+    </main>
+  </body>
+</html>
