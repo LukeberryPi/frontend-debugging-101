@@ -27,6 +27,41 @@
             sessionStorage.setItem(checkbox.id, false);
           });
         });
+
+        const helpButton = document.getElementById("helpButton");
+
+        const clipboardText = `Describe the problem you are having by answering these questions:
+
+      - what you are trying to do
+      - what went wrong
+      - what you have tried so far
+
+Now send that message to a group chat where people can help you.`;
+
+        function updateButtonState() {
+          const allChecked = Array.from(checkboxes).every(
+            (checkbox) => checkbox.checked
+          );
+          helpButton.disabled = !allChecked;
+        }
+
+        updateButtonState();
+
+        checkboxes.forEach((checkbox) => {
+          checkbox.addEventListener("change", updateButtonState);
+        });
+
+        helpButton.addEventListener("click", () => {
+          navigator.clipboard
+            .writeText(clipboardText)
+            .then(() => {
+              alert(clipboardText);
+            })
+            .catch((err) => {
+              console.error("Failed to copy text: ", err);
+              alert("Failed to copy text to clipboard. Please try again.");
+            });
+        });
       });
     </script>
   </head>
@@ -128,26 +163,24 @@
       <div>
         <input type="checkbox" id="anonymous-window" />
         <label for="anonymous-window"
-          >Does it happen in an anonymous window? (~2m)</label
+          >does it happen in an anonymous window? (~2m)</label
         >
       </div>
       <div>
         <input type="checkbox" id="correct-role-permissions" />
         <label for="correct-role-permissions"
-          >does your current user have the correct role permissions? (~5
-          m)</label
+          >does your user have the correct role permissions? (~5m)</label
         >
       </div>
 
       <h2>i didn't solve it yet, what now?</h2>
       <div>
         <input type="checkbox" id="take-a-break" />
-        <label for="take-a-break">Take a break (~10m)</label>
+        <label for="take-a-break">have you taken a break? (~10m)</label>
       </div>
-      <div>
-        <input type="checkbox" id="write-it-down" />
-        <label for="write-it-down">Write it down (~20m)</label>
-      </div>
+      <button style="margin-top: 24px" id="helpButton">
+        I'm ready to ask for help
+      </button>
     </main>
   </body>
 </html>
