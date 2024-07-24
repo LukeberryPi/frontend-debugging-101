@@ -30,9 +30,7 @@
 
         const helpButton = document.getElementById("helpButton");
 
-        const clipboardText = `- what you are trying to do?
-- what went wrong?
-- what you have tried so far?`;
+        const clipboardText = `what you are you trying to do, what went wrong, what you have tried so far?`;
 
         function updateButtonState() {
           const allChecked = Array.from(checkboxes).every(
@@ -52,7 +50,7 @@
             .writeText(clipboardText)
             .then(() => {
               alert(
-                `These questions have been copied to your clipboard to help you describe your problem.\n\n${clipboardText}\n\nSend it to a group chat (preferred) or as a private message (non-preferred) to get help.`
+                `The following questions have been copied to your clipboard to help you describe your problem:\n\n"${clipboardText}"\n\nAnswer them in a paragraph and send it to a group chat (preferred) or as a private message to get help.`
               );
             })
             .catch((err) => {
